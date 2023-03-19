@@ -1,0 +1,34 @@
+<div class="btn-container">
+  <div cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+    <button class="btnAdd btn btn-success" (click)="agregarLink()">+</button>
+    <div *ngFor="let link of linksNav" class="btn-group mr-2">
+      <button type="button" class="btnLink btn btn-outline-info" placement="bottom" cdkDrag
+        [ngbPopover]="popContent"
+        [autoClose]="'outside'"
+        popoverTitle="Link"
+        (click)="editarLink(link)">
+        {{link.title}}
+      </button>
+      <button type="button" class="btn btn-danger" (click)="eliminarLink(link)">x</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #popContent modal>
+  <div class="modal-header">
+    <h6 class="modal-title">Editar Link</h6>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Título:</label>
+        <input type="text" class="form-control" name="titleEditado" [(ngModel)]="linkEditado.title">
+      </div>
+      <div class="form-group">
+        <label>URL:</label>
+        <input type="text" class="form-control" name="urlEditado" [(ngModel)]="linkEditado.url">
+      </div>
+    </form>
+    <button type="button" class="btn btn-success" (click)="guardarLink()">Confirm</button>
+  </div>
+</ng-template>

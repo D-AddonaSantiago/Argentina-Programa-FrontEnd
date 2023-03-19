@@ -1,0 +1,47 @@
+<div class="bigDiv">
+  <h1>Education</h1>
+  <div>
+
+    <div *ngFor="let edu of eduList" class="mainContainer">
+      <div>
+
+
+        <div class="container">
+
+          <div class="eduContainer">
+            <img src="{{ edu.img }}" alt="Profile_Img">
+            <label for="inputBanner" class="btn btn-success">
+              Edit
+              <input id="inputBanner" type="file"/>
+            </label>
+          </div>
+
+          <div class="meContainer">
+            <div *ngIf="editingElem !== edu.id">
+              <h2> {{ edu.titulo}} </h2>
+              <p>{{ edu.descripcion }}</p>
+              <button class="btn btn-primary" (click)="editingElem = edu.id; tempEdu = edu">Edit</button>
+              <button type="button" class="btn btn-danger" (click)="eliminarEduMe(edu)">x</button>
+            </div>
+            <div class="meModifier" *ngIf="editingElem === edu.id">
+              <input [(ngModel)]="tempEdu.titulo">
+              <div class="textArea">
+                <textarea [(ngModel)]="tempEdu.descripcion"></textarea>
+              </div>
+              <button class="btn btn-success" (click)="editarEduMe(tempEdu); editingElem = -1">Save</button>
+              <button class="btn btn-danger" (click)="editingElem = -1">Cancel</button>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-success agregarLink" (click)="agregarLink()">
+    Add
+  </button>
+
+</div>
