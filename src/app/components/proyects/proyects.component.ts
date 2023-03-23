@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { proyecto } from 'src/app/models/proyecto.model';
 import { ProyectoService } from 'src/app/service/proyecto.service';
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-proyects',
@@ -11,10 +12,17 @@ export class ProyectsComponent implements OnInit{
 
   proyList: proyecto[] = [];
 
-  constructor(public proyectoService: ProyectoService){}
+  constructor(public proyectoService: ProyectoService, private tokenService: TokenService){}
+
+  isLogged = false;
 
   ngOnInit(): void {
     this.proyectoService.getProyecto().subscribe(data => this.proyList = data);
+    if(this.tokenService.getToken()) {
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
   }
 
   editingElem: any = -1;
@@ -42,7 +50,7 @@ export class ProyectsComponent implements OnInit{
     const nuevoProy: proyecto = {
       titulo: 'Nuevo Proyecto',
       descripcion: "Descripcion",
-      img: "../../../assets/Img/Proyect1.jpg",
+      img: "https://firebasestorage.googleapis.com/v0/b/sdfrontend.appspot.com/o/ProyectStandard.png?alt=media&token=55c41267-bfab-434c-8570-dac5906307bf",
       img2: "",
       img3: ""
     };
@@ -55,12 +63,29 @@ export class ProyectsComponent implements OnInit{
     this.proyectoService.deleteProyecto(id).subscribe();
     this.actuaizarLista();
   }
-  deleteImage(proy: proyecto, img: string) {
-   // this.tempProject.images.splice(index, 1)
+
+  deleteImage(proy: proyecto) {
+    proy.img = 'a';
   }
 
-  addImage(){
+  deleteImage2(proy: proyecto) {
+    proy.img2 = 'a';
+  }
 
+  deleteImage3(proy: proyecto) {
+    proy.img3 = 'a';
+  }
+
+  addImage1(proy: proyecto){
+    proy.img = "https://firebasestorage.googleapis.com/v0/b/sdfrontend.appspot.com/o/ProyectStandard.png?alt=media&token=55c41267-bfab-434c-8570-dac5906307bf";
+  }
+
+  addImage2(proy: proyecto){
+    proy.img2 = "https://firebasestorage.googleapis.com/v0/b/sdfrontend.appspot.com/o/ProyectStandard.png?alt=media&token=55c41267-bfab-434c-8570-dac5906307bf";
+  }
+
+  addImage3(proy: proyecto){
+    proy.img3 = "https://firebasestorage.googleapis.com/v0/b/sdfrontend.appspot.com/o/ProyectStandard.png?alt=media&token=55c41267-bfab-434c-8570-dac5906307bf";
   }
 
 }

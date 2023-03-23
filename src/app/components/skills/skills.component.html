@@ -10,8 +10,8 @@
           <div class="skill-level-percent">{{ skill.valor }}%</div>
         </div>
       </div>
-      <button class="btn btn-primary editButton" (click)="editingSkill = skill.id; tempSkill = skill">Edit</button>
-      <button class="btn btn-danger editButton" (click)="eliminarSkill(skill)">X</button>
+      <button class="btn btn-primary editButton" *ngIf="isLogged" (click)="editingSkill = skill.id; tempSkill = skill">Edit</button>
+      <button class="btn btn-danger editButton" *ngIf="isLogged" (click)="eliminarSkill(skill)">X</button>
     </div>
 
     <div class="ifFalse" *ngIf="editingSkill === skill.id">
@@ -29,7 +29,7 @@
 
   </div>
 
-  <button class="btn btn-success addbutton" (click)="agregarSkill()">Add New Skill</button>
+  <button class="btn btn-success addbutton" (click)="agregarSkill()" *ngIf="isLogged">Add New Skill</button>
 
 </div>
 

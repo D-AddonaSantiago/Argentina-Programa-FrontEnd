@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { work_exp } from 'src/app/models/work_exp.model';
+import { TokenService } from 'src/app/service/token.service';
 import { WorkExpService } from 'src/app/service/work-exp.service';
 
 @Component({
@@ -11,10 +12,18 @@ export class WorkExperienceComponent implements OnInit{
 
   workExp: work_exp[] = [];
 
-  constructor(public workExpService: WorkExpService){}
+  constructor(public workExpService: WorkExpService, private tokenService: TokenService){}
+
+  isLogged = false;
 
   ngOnInit(): void {
     this.workExpService.getWorkExp().subscribe(data => {this.workExp = data});
+
+    if(this.tokenService.getToken()) {
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
   }
 
   editingElem:any = -1;

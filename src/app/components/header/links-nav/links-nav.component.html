@@ -1,15 +1,23 @@
 <div class="btn-container">
-  <div cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
-    <button class="btnAdd btn btn-success" (click)="agregarLink()">+</button>
+  <div cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)" *ngIf="isLogged">
+    <button class="btnAdd btn btn-success" (click)="agregarLink()" *ngIf="isLogged">+</button>
     <div *ngFor="let link of linksNav" class="btn-group mr-2">
-      <button type="button" class="btnLink btn btn-outline-info" placement="bottom" cdkDrag
+      <button type="button" class="btnLink btn btn-outline-dark" placement="bottom" cdkDrag
         [ngbPopover]="popContent"
         [autoClose]="'outside'"
         popoverTitle="Link"
         (click)="editarLink(link)">
         {{link.title}}
       </button>
-      <button type="button" class="btn btn-danger" (click)="eliminarLink(link)">x</button>
+      <button type="button" class="btn btn-danger" (click)="eliminarLink(link)" *ngIf="isLogged">x</button>
+    </div>
+  </div>
+
+  <div cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)" *ngIf="!isLogged">
+    <div *ngFor="let link of linksNav" class="btn-group mr-2">
+      <a type="button" class="btnLink btn btn-outline-dark" href= {{link.url}}>
+        {{link.title}}
+      </a>
     </div>
   </div>
 </div>

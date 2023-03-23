@@ -3,6 +3,7 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { linksNav } from 'src/app/models/linksNav.model';
 import { LinksNavService } from 'src/app/service/links-nav.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { TokenService } from 'src/app/service/token.service';
 
 
 @Component({
@@ -14,10 +15,18 @@ export class LinksNavComponent {
 
   linksNav: linksNav[] = [];
 
-  constructor(public linksNavService: LinksNavService){}
+  constructor(public linksNavService: LinksNavService, private tokenService: TokenService){}
+
+  isLogged = false;
 
   ngOnInit(): void {
     this.linksNavService.getLinksNav().subscribe(data => {this.linksNav = data});
+
+    if(this.tokenService.getToken()) {
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
   }
 
   childModal: any;

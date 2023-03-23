@@ -25,7 +25,9 @@ export class EducacionService {
   }
 
   public editEducacion(educacion: educacion): Observable<educacion> {
-    const url = `${this.URL}editar/${educacion.id}?titulo=${educacion.titulo}&descripcion=${educacion.descripcion}&img=${educacion.img}`;
+    const url = `${this.URL}editar/${educacion.id}?titulo=${educacion.titulo}&descripcion=${educacion.descripcion}&img=`+educacion.img;
+    console.log(url);
+
     return this.http.put<educacion>(url,null);
   }
 }

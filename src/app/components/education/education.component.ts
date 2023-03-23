@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { educacion } from 'src/app/models/educacion.model';
 import { EducacionService } from 'src/app/service/educacion.service';
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-education',
@@ -11,10 +12,18 @@ export class EducationComponent implements OnInit{
 
   eduList: educacion [] = [];
 
-  constructor(public educacionService: EducacionService){}
+  constructor(public educacionService: EducacionService, private tokenService: TokenService){}
+
+  isLogged = false;
 
   ngOnInit(): void {
     this.educacionService.getEducacion().subscribe(data => {this.eduList = data});
+
+    if(this.tokenService.getToken()) {
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
   }
 
   editingElem:any = -1;
@@ -27,8 +36,9 @@ export class EducationComponent implements OnInit{
     }, 200);
   }
 
-  editarEduMe(edu: educacion) {
-    this.educacionService.editEducacion(edu).subscribe();
+  editarEduMe() {
+    console.log("LINK IMAGEN: "+this.tempEdu.img);
+    this.educacionService.editEducacion(this.tempEdu).subscribe();
     this.actualizarLista();
   }
 
@@ -36,7 +46,7 @@ export class EducationComponent implements OnInit{
     const nuevoEdu: educacion = {
       titulo: "Nueva educacion",
       descripcion: "Descripcion",
-      img: "../../../assets/Img/educationStandard.jpg"
+      img: "https://firebasestorage.googleapis.com/v0/b/sdfrontend.appspot.com/o/educationStandard.jpg?alt=media&token=44baecfc-acc8-45d4-a2b4-7163256a756c"
     }
     this.educacionService.postEducacion(nuevoEdu).subscribe();
     this.actualizarLista();

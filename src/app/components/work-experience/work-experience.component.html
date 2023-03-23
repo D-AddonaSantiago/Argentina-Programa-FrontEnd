@@ -4,28 +4,29 @@
     <div *ngFor="let work of workExp;" class="mainContainer" >
       <div>
 
-
         <div class="container">
 
           <div class="workContainer">
             <img src="{{ work.img }}" alt="Profile_Img">
-            <label for="inputBanner" class="btn btn-success">
-              Edit
-              <input id="inputBanner" type="file"/>
-            </label>
           </div>
 
           <div class="meContainer">
             <div *ngIf="editingElem !== work.id">
               <h2> {{ work.titulo}} </h2>
               <p>{{ work.descripcion }}</p>
-              <button class="btn btn-primary" (click)="editingElem = work.id; tempWork = work">Edit</button>
-              <button type="button" class="btn btn-danger" (click)="eliminarWork(work)">x</button>
+              <button class="btn btn-primary" (click)="editingElem = work.id; tempWork = work" *ngIf="isLogged">Edit</button>
+              <button type="button" class="btn btn-danger" (click)="eliminarWork(work)" *ngIf="isLogged">x</button>
             </div>
             <div class="meModifier" *ngIf="editingElem === work.id">
               <input [(ngModel)]="tempWork.titulo">
               <div class="textArea">
                 <textarea [(ngModel)]="tempWork.descripcion"></textarea>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3" >URL Imagen</span>
+                </div>
+                <input type="text" [(ngModel)]="tempWork.img" class="form-control" id="img" aria-describedby="basic-addon3">
               </div>
               <button class="btn btn-success" (click)="editarWork(tempWork); editingElem = -1">Save</button>
               <button class="btn btn-danger" (click)="editingElem = -1">Cancel</button>
@@ -34,14 +35,12 @@
 
         </div>
 
-
       </div>
     </div>
   </div>
 
-  <button class="btn btn-success agregarLink" (click)="agregarWork()">
+  <button class="btn btn-success agregarLink" (click)="agregarWork()" *ngIf="isLogged">
       Add
    </button>
-
 
 </div>

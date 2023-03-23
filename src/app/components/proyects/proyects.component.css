@@ -15,30 +15,59 @@
 
 .project-images {
   display: flex;
+  padding-top: 20px;
 }
 
 .project-images img {
   max-width: 400px;
-  margin-right: 1em;
+  margin: auto;
+}
+
+.img-thumbnail {
+  display: flex;
+}
+
+.btn {
+margin-left: 10px;
+}
+
+.btn-primary{
+  margin-left: 30px;
+}
+
+.titulo {
+  display: block;
+}
+
+.descripcion {
+  display: block;
+}
+
+.descripcion{
+  width: 760px;
+  height: 150px;
+  background-color: transparent;
+  text-align: left;
+  border: 1px ;
+  border-radius: 5px;
+  resize: none;
+}
+
+.project-images {
+  display: flex;
+  padding-top: 20px;
 }
 
 .image-item {
-  position: relative;
-  display: inline-block;
+  display: block;
+  margin: auto;
 }
 
 .image-item img {
-  display: inline-block;
-  vertical-align: top;
   max-width: 400px;
-  margin-right: 1em;
+  margin: auto;
 }
 
-.image-item input[type="text"] {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
+.img-thumbnail {
+  display: flex;
 }

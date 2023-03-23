@@ -7,43 +7,46 @@
         <h2>{{ project.titulo }}</h2>
         <p>{{ project.descripcion }}</p>
         <div class="project-images">
-          <img class="img-thumbnail" src="{{ project.img }}" alt="ProyImg">
-          <img class="img-thumbnail" *ngIf=" project.img2 && project.img2.length > 3" src="{{ project.img2 }}" alt="ProyImg2">
-          <img class="img-thumbnail" *ngIf="project.img2 && project.img3.length > 3" src="{{ project.img3 }}" alt="ProyImg3">
+          <img class="img-thumbnail" *ngIf="project.img && project.img.length > 3" src="{{ project.img }}" alt="ProyImg">
+          <img class="img-thumbnail" *ngIf="project.img2 && project.img2.length > 3" src="{{ project.img2 }}" alt="ProyImg2">
+          <img class="img-thumbnail" *ngIf="project.img3 && project.img3.length > 3" src="{{ project.img3 }}" alt="ProyImg3">
         </div>
       </div>
-      <button class="btn btn-primary" (click)="editingElem = project.id; tempProy = project">Editar</button>
-      <button class="btn btn-danger" (click)="eliminarProyecto(project)">Eliminar</button>
+      <button class="btn btn-primary" (click)="editingElem = project.id; tempProy = project" *ngIf="isLogged">Editar</button>
+      <button class="btn btn-danger" (click)="eliminarProyecto(project)" *ngIf="isLogged">Eliminar</button>
     </div>
 
     <div class="ifFalse" *ngIf="editingElem === project.id">
       <div class="project-info">
-        <input type="text" [(ngModel)]="tempProy.titulo">
-        <textarea [(ngModel)]="tempProy.descripcion"></textarea>
+        <input class="titulo" type="text" [(ngModel)]="tempProy.titulo">
+        <textarea class="descripcion" [(ngModel)]="tempProy.descripcion"></textarea>
         <div class="project-images">
-          <div class="image-item">
+          <div class="image-item" *ngIf="project.img && tempProy.img.length > 3">
             <img class="img-thumbnail" src="{{ tempProy.img }}" alt="ProyImg">
             <input type="text" [(ngModel)]="tempProy.img">
-            <button class="btn btn-danger" (click)="deleteImage(project, tempProy.img)">Eliminar</button>
+            <button class="btn btn-danger" (click)="deleteImage(project)">Eliminar</button>
           </div>
           <div class="image-item" *ngIf="project.img2 && tempProy.img2.length > 3">
             <img class="img-thumbnail" src="{{ tempProy.img2 }}" alt="ProyImg2">
-            <input type="text" [(ngModel)]="tempProy.img">
-            <button class="btn btn-danger" (click)="deleteImage(project, tempProy.img2)">Eliminar</button>
+            <input type="text" [(ngModel)]="tempProy.img2">
+            <button class="btn btn-danger" (click)="deleteImage2(project)">Eliminar</button>
           </div>
-          <div class="image-item" *ngIf="project.img2 && tempProy.img3.length > 3">
+          <div class="image-item" *ngIf="project.img3 && tempProy.img3.length > 3">
             <img class="img-thumbnail" src="{{ tempProy.img3 }}" alt="ProyImg3">
-            <input type="text" [(ngModel)]="tempProy.img">
-            <button class="btn btn-danger" (click)="deleteImage(project, tempProy.img3)">Eliminar</button>
+            <input type="text" [(ngModel)]="tempProy.img3">
+            <button class="btn btn-danger" (click)="deleteImage3(project)">Eliminar</button>
           </div>
         </div>
-        <button class="btn btn-primary" (click)="addImage()">Agregar Imagen</button>
+        <button class="btn btn-primary" *ngIf="tempProy.img.length <= 3" (click)="addImage1(tempProy)">Agregar Imagen 1</button>
+        <button class="btn btn-primary" *ngIf="tempProy.img2.length <= 3" (click)="addImage2(tempProy)">Agregar Imagen 2</button>
+        <button class="btn btn-primary" *ngIf="tempProy.img3.length <= 3" (click)="addImage3(tempProy)">Agregar Imagen 3</button>
+
       </div>
       <button class="btn btn-primary" (click)="editProject(tempProy); editingElem = -1">Guardar</button>
       <button class="btn btn-secondary" (click)="editingElem = -1">Cancelar</button>
     </div>
   </div>
 
-  <button class="btn btn-success" (click)="agregarProyecto()">Agregar Nuevo Proyecto</button>
+  <button class="btn btn-success" (click)="agregarProyecto()" *ngIf="isLogged">Agregar Nuevo Proyecto</button>
 
 </div>

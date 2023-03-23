@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { skill } from 'src/app/models/skill.model';
 import { SkillService } from 'src/app/service/skill.service';
+import { TokenService } from 'src/app/service/token.service';
 
 interface Skill {
   name: string;
@@ -16,10 +17,18 @@ export class SkillsComponent {
 
   skills: skill[] = [];
 
-  constructor(public skillService: SkillService){}
+  constructor(public skillService: SkillService, private tokenService: TokenService){}
+
+  isLogged = false;
 
   ngOnInit(): void {
     this.skillService.getSkill().subscribe(data => {this.skills = data});
+
+    if(this.tokenService.getToken()) {
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
   }
 
   editingSkill: any = -1;
