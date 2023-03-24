@@ -8,4 +8,14 @@ export const environment = {
     authDomain: 'sdfrontend.firebaseapp.com',
     messagingSenderId: '580180299058',
     measurementId: 'G-SSXQK391PX',
-  },};
+  },
+  production: true,
+    apiURL: "https://portfolio-backend-sd.onrender.com/",
+    idPersona:1
+};
+/*
+  export const environment = {
+    production: true,
+    apiURL: "https://portfolio-backend-sd.onrender.com/",
+    idPersona:1
+  }*/

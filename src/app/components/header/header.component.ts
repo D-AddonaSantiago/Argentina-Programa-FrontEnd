@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit{
 
   constructor(private modalService: NgbModal, private router: Router, private tokenService: TokenService) { }
   isLogged = false;
+  logo = "https://firebasestorage.googleapis.com/v0/b/sdfrontend.appspot.com/o/APLogo.png?alt=media&token=f8d159cb-fb1a-44d2-a7be-bfd4f1a4567a";
 
   openPopup() {
     const modalRef = this.modalService.open(LoginComponent);

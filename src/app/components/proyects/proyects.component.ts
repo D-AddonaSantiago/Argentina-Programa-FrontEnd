@@ -28,13 +28,6 @@ export class ProyectsComponent implements OnInit{
   editingElem: any = -1;
   tempProy: proyecto = new proyecto("","","","","");
 
-  /*
-  selectedProjectIndex = -1;
-  selectedProject: Project = { title: '', description: '', images: [''] };
-  editProjectIndex = -1;
-  editing = false;
-  tempProject: Project = {title:'', description:'', images:['']}*/
-
   actuaizarLista():void{
     setTimeout(() => {
       this.proyectoService.getProyecto().subscribe(data => {this.proyList = data});
