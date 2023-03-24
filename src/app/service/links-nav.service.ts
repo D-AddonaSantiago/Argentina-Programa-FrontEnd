@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { linksNav } from '../models/linksNav.model';
 
 @Injectable({
@@ -8,7 +9,8 @@ import { linksNav } from '../models/linksNav.model';
 })
 
   export class LinksNavService {
-    URL = 'http://localhost:8080/linksNav/';
+    //URL = 'http://localhost:8080/linksNav/';
+    URL: string = environment.apiURL + "linksNav/"
 
     constructor(private http: HttpClient) {}
 
